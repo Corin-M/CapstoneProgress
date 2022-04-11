@@ -18,15 +18,7 @@ db.create_all()
 
 @app.route('/', methods=['GET','POST'])
 def index():
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        file.save(os.path.join(UPLOAD_FOLDER, file.filename))
+  
         upload = Upload(filename=file.filename, fileurl=(app.config['UPLOAD_FOLDER']+file.filename))
         db.session.add(upload)
         db.session.commit()
