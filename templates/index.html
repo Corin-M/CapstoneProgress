@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Upload Example</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='formatting.css') }}">
+    <title>Home Page</title>
     <style>
         body {
           margin: 0;
@@ -19,19 +18,29 @@
       </style>
 </head>
 <body>
-    <div class="center">
-        <form method="POST" action="/" enctype="multipart/form-data">
-            <input type="file" name="file">
-            <button>Submit</button>
-        </form>
-
-      
-    </div>
-    <div class="videoDisplays">
+  <div class="topnav">
+    <a class="active" href={{url_for('index')}}>Home</a>
+    <a type="button" href={{url_for('uploads')}}> Upload Video</a>
+    <a type="button" href={{url_for('howTo')}}> How To Create A Social Story</a>
+  </div>
+  <form method="POST" action="/filter">
+    <label for="filter-method">Filter Method:</label>
+    <select name="filter-method" id="filter-method">
+      <option value="all">Show All</option>
+      <option value="school">School</option>
+      <option values="medical">Medical</option>
+      <option values="errands">Errands</option>
+      <option values="emotReg">Emotional Regulation</option>
+    </select>
+    <button type="submit">Update Filter</button>
+  </form>
+  <div class="videoDisplays">
       {% for vid in vids %}
-      {{url_for('index', filename=vid.filename)}}
-        <image src="coloredself.jpg"></image>
+        <label>{{vid[0]}}</label><br>
+        <iframe width="420" height="315"
+        src="{{vid[1]}}">
+        </iframe><br>
       {% endfor %}
-        </div>
+   </div>
 </body>
 </html>
