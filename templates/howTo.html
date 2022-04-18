@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='formatting.css') }}">
+    <title>How To Page</title>
+    <style>
+        body {
+          margin: 0;
+        }
+  
+        .center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+      </style>
+</head>
+<body>
+    <div class="topnav">
+        <a class="active" href={{url_for('index')}}>Home</a>
+        <a type="button" href={{url_for('uploads')}}> Upload Video</a>
+        <a type="button" href={{url_for('howTo')}}> How To Create A Social Story</a>
+      </div>
+    <h1>This is where I will put my instructions for how to make a social Story for VR and video</h1>
+</body>
+</html>
