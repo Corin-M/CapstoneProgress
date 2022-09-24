@@ -17,8 +17,7 @@ class Upload(db.Model):
     author = db.Column(db.String(16))
     fileURL= db.Column(db.String(50))
     tags= db.Column(db.String(50))
-    # errands=db.Column(db.String(16))
-    #  emotReg = db.Column(db.String(16))
+    description = db.Column(db.String(150))
     audience= db.Column(db.String(50))
     show_filter= db.Column(db.Boolean)
     show_search = db.Column(db.Boolean)
@@ -32,7 +31,7 @@ def checkDisplays():
     displayVids = []
     for video in Upload.query.all():
         if video.show_filter==True and video.show_search==True:
-            displayVids.append([video.fileName,video.author, video.fileURL])
+            displayVids.append([video.fileName,video.author,  video.fileURL,video.description])
     return displayVids
 
 def clearSearchFilters():
@@ -46,7 +45,7 @@ def clearSearchFilters():
 def index():
     displayVids = []
     for video in Upload.query.all():
-         displayVids.append([video.fileName,video.author, video.fileURL])
+         displayVids.append([video.fileName,video.author, video.fileURL, video.description])
     return render_template('index.html', vids=displayVids)
 
 
@@ -62,9 +61,8 @@ def filterSearch():
         for video in Upload.query.all():
             video.show_search = True
     else:
-        for video in Upload.query.filter(Upload.author.contains(searchTerm)):
-            video.show_search = True
-        for video in Upload.query.filter(Upload.fileName.contains(searchTerm)):
+        for video in Upload.query.filter(Upload.author.contains(searchTerm)|
+        Upload.fileName.contains(searchTerm) |Upload.description.contains(searchTerm)):
             video.show_search = True
     if cat_filter == "all" and aud_filter == "all":
         for video in Upload.query.all():
@@ -92,8 +90,8 @@ def add():
         tags=""
         for tag in tagList:
             tags = tags +tag
-        urlID= "https://www.youtube.com/embed/"+ fullURL[startNumIndex+2:startNumIndex +13]
-        newUpload = Upload(fileName=request.form['videoName'], author =request.form['author'],fileURL=urlID, audience=request.form['audience'], 
+        urlID= "https://www.youtube.com/embed/"+ fullURL[starstNumIndex+2:startNumIndex +13]
+        newUpload = Upload(fileName=request.form['videoName'], author =request.form['author'],description = request.form['description'],fileURL=urlID, audience=request.form['audience'], 
                    tags= tags, show_search=True, show_filter=True)
         db.session.add(newUpload)
         db.session.commit()
