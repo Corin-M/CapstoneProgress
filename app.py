@@ -18,7 +18,6 @@ class Upload(db.Model):
     fileURL= db.Column(db.String(50))
     tags= db.Column(db.String(50))
     description = db.Column(db.String(150))
-    audience= db.Column(db.String(50))
     show_filter= db.Column(db.Boolean)
     show_search = db.Column(db.Boolean)
 
@@ -68,7 +67,7 @@ def filterSearch():
         for video in Upload.query.all():
             video.show_filter = True
     else:
-        for video in Upload.query.filter(Upload.tags.contains(cat_filter) |Upload.tags.contains(aud_filter)):
+        for video in Upload.query.filter(Upload.tags.contains(cat_filter) | Upload.tags.contains(aud_filter)):
             video.show_filter = True
     db.session.commit
     displayVids = checkDisplays()
@@ -89,11 +88,15 @@ def add():
             return redirect('/uploads')
         tagList=request.form.getlist('tags')
         tags=""
+        audience = request.form["audience"]
+        tags = tags+ audience
+        if audience == "all_aud":
+            tags = tags + "preschool elementary preteen teenager youngAdult adult senior"
         for tag in tagList:
             tags = tags +tag
         urlID= "https://www.youtube.com/embed/"+ fullURL[startNumIndex+2:startNumIndex +13]
-        newUpload = Upload(fileName=request.form['videoName'], author =request.form['author'],description = request.form['description'],fileURL=urlID, audience=request.form['audience'], 
-                   tags= tags, show_search=True, show_filter=True)
+        newUpload = Upload(fileName=request.form['videoName'], author =request.form['author'],description = request.form['description'],fileURL=urlID,
+                    tags= tags, show_search=True, show_filter=True)
         db.session.add(newUpload)
         db.session.commit()
         return redirect('/')
