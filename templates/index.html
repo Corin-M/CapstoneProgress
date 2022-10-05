@@ -20,8 +20,9 @@
 <body>
   <div class="topnav">
     <a class="active" href={{url_for('index')}}>Home</a>
-    <a type="button" href={{url_for('uploads')}}> Upload Video</a>
-    <a type="button" href={{url_for('howTo')}}> How To Create A Social Story</a>
+        <a type="button" href={{url_for('uploads')}}> Upload Video</a>
+        <a type="button" href={{url_for('howTo')}}> How To Create A Social Story</a>
+        <a type="button" href={{url_for('resourcesPage')}}>Additional Resources</a>
   </div>
   <form method ="POST" action="/filterSearch" enctype="multipart/form-data">
     <label for="searchterm">Search Stories:</label>

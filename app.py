@@ -79,6 +79,7 @@ def filterSearch():
 def uploads():
     return render_template('uploading.html')
 
+
 @app.route('/add', methods=['GET','POST'])
 def add():
         fullURL = request.form["videoURL"]
@@ -90,7 +91,7 @@ def add():
         tags=""
         for tag in tagList:
             tags = tags +tag
-        urlID= "https://www.youtube.com/embed/"+ fullURL[starstNumIndex+2:startNumIndex +13]
+        urlID= "https://www.youtube.com/embed/"+ fullURL[startNumIndex+2:startNumIndex +13]
         newUpload = Upload(fileName=request.form['videoName'], author =request.form['author'],description = request.form['description'],fileURL=urlID, audience=request.form['audience'], 
                    tags= tags, show_search=True, show_filter=True)
         db.session.add(newUpload)
@@ -100,6 +101,10 @@ def add():
 @app.route('/howTo')
 def howTo():
     return render_template("howTo.html")
+
+@app.route('/resourcesPage')
+def resourcesPage():
+    return render_template("resourcesPage.html")
 
 if __name__== "__main__":
     db.create_all()
