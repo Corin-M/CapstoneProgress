@@ -1,0 +1,15 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "*.py",
+            "use": "@Corin-M/CapstoneProgress"
+        }
+    ],
+    "routes": [
+        {
+            "src": "(.*)",
+            "dest": "app.py"
+        }
+    ]
+  }
