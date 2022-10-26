@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!--Load the formatting.css file for formatting, subject to change-->  
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='formatting.css') }}">
-    <title>File Upload Example</title>
+    <title>Upload Video</title>
+     <!--Current styling in addition to the css linked above, subject to change-->
     <style>
         body {
           margin: 0;
@@ -18,35 +20,44 @@
       </style>
 </head>
 <body>
+    <!--Top navigation bar and corresponding buttons-->
     <div class="topnav">
         <a class="active" href={{url_for('index')}}>Home</a>
         <a type="button" href={{url_for('uploads')}}> Upload Video</a>
         <a type="button" href={{url_for('howTo')}}> How To Create A Social Story</a>
         <a type="button" href={{url_for('resourcesPage')}}>Additional Resources</a>
       </div>
-  {% block content %}
-<div class="pop-up">
-    {% for message in get_flashed_messages() %}
-    <div class="alert">
-        <button type="button" class="close" data-dismiss="alert">x</button>
-        {{ message }}
-        {{ get_flashed_messages().remove(message)}}
+
+    <!--If an error is thrown during upload, allow for flashed messages-->
+    {% block content %}
+    <div class="pop-up">
+        {% for message in get_flashed_messages() %}
+        <div class="alert">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            {{ message }}
+            {{ get_flashed_messages().remove(message)}}
+        </div>
+        {% endfor %}
+        {% block page_content %}{% endblock %}
     </div>
-    {% endfor %}
-    {% block page_content %}{% endblock %}
-</div>
-{% endblock %}
+    {% endblock %}
 
     <div class="center">
+      <!--Create the form for uploading a new video-->
         <form method="POST" action="/add" enctype="multipart/form-data">
+          <!--Name of the video-->
           <label for="videoName">Video Name:</label> 
           <input type="text" id="videoName" name ="videoName"><br>
+          <!--Author of the video-->
           <label for="Author">Author:</label> 
           <input type="text" id="author" name ="author"><br>
+          <!--URL for the video-->
           <label for="videoURL">Enter URL here:</label>
           <input type="text" id="videoURL" name="videoURL"><br>
+          <!--Short description for the video-->
           <label for="description">Short Description:</label><br> 
           <textarea id="description" name ="description"></textarea><br>
+          <!--Drop down menu for the audience level of the video-->
           <label for="audience">Audience level:</label>
           <select name="audience" id="audience">
             <option value="all_aud">All Ages</option>
@@ -59,11 +70,13 @@
             <option value="senior">Senior (60+)</option>
           </select>
           <br>
+          <!--Checkbox list for the categories of the subject of the video-->
           <label>Subjects:</label><br>
             <input type="checkbox" value="school" id ="tags" name="tags"><label>School Related</label><br>
             <input type="checkbox" value="medical" id ="tags" name="tags"><label>Medical Procedure</label><br>
             <input type="checkbox" value="errands"id ="tags" name="tags"><label>Errands</label><br>
             <input type="checkbox" value="emotReg" id ="tags" name="tags"><label>Emotional Regulation</label><br>
+          <!--Submit button to trigger /add-->
           <button type="submit">Submit</button>
         </form>
 

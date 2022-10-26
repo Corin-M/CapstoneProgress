@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!--Load the formatting.css file for formatting, subject to change-->
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='formatting.css') }}">
     <title>Home Page</title>
+    <!--Current styling in addition to the css linked above, subject to change-->
     <style>
         body {
           margin: 0;
@@ -17,16 +19,21 @@
         }
       </style>
 </head>
+
 <body>
+  <!--Top navigation bar and corresponding buttons-->
   <div class="topnav">
-    <a class="active" href={{url_for('index')}}>Home</a>
-        <a type="button" href={{url_for('uploads')}}> Upload Video</a>
-        <a type="button" href={{url_for('howTo')}}> How To Create A Social Story</a>
-        <a type="button" href={{url_for('resourcesPage')}}>Additional Resources</a>
+    <a class="active" href={{ url_for('index' )}}>Home</a>
+        <a type="button" href={{ url_for('uploads' )}}> Upload Video</a>
+        <a type="button" href={{ url_for('howTo' )}}> How To Create A Social Story</a>
+        <a type="button" href={{ url_for('resourcesPage' )}}>Additional Resources</a>
   </div>
+  <!--Create the search and filter bar to take user inputs as a single form-->
   <form method ="POST" action="/filterSearch" enctype="multipart/form-data">
+    <!--Search bar-->
     <label for="searchterm">Search Stories:</label>
     <input type="text" id="searchterm" name="searchterm">
+    <!--Filter by category-->
     <select name="category-filter"  id="category-filter">
       <option value="all">Show All</option>
       <option value="school">School</option>
@@ -34,6 +41,7 @@
       <option values="errands">Errands</option>
       <option values="emotReg">Emotional Regulation</option>
     </select>
+    <!--Filter by audience-->
     <select name="audience-filter"  id="audience-filter">
       <option value="all">All Ages</option>
       <option value="preschool">Preschool (0-4)</option>
@@ -44,8 +52,11 @@
       <option value="adult">Adult(26-60)</option>
       <option value="senior">Senior (60+)</option>
     </select>
-    <button type="submit">Update Filters</button>
+    <button type="submit">Search and Update Filters</button>
   </form>
+
+  <!--Display the videos passed into the vids list upon loading
+  vid[0]=name, vid[1] = author, vid[2] = url, vid[3] = description -->
   <div class="videoDisplays">
       {% for vid in vids %}
         <label>{{vid[0]}}</label>

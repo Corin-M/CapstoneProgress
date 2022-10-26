@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!--Load the formatting.css file for formatting, subject to change-->  
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='formatting.css') }}">
     <title>Resources</title>
+     <!--Current styling in addition to the css linked above, subject to change-->
     <style>
         body {
           margin: 0;
@@ -18,12 +20,17 @@
       </style>
 </head>
 <body>
-    <div class="topnav">
-        <a class="active" href={{url_for('index')}}>Home</a>
-        <a type="button" href={{url_for('uploads')}}> Upload Video</a>
-        <a type="button" href={{url_for('howTo')}}> How To Create A Social Story</a>
-        <a type="button" href={{url_for('resourcesPage')}}>Additional Resources</a>
-      </div>
-    <h1>This is where I will put my additional resources explaining the uses and benefits of social stories and additional places for people to learn more</h1>
+  <!--Top navigation bar and corresponding buttons-->
+  <div class="topnav">
+      <a class="active" href={{url_for('index')}}>Home</a>
+      <a type="button" href={{url_for('uploads')}}> Upload Video</a>
+      <a type="button" href={{url_for('howTo')}}> How To Create A Social Story</a>
+      <a type="button" href={{url_for('resourcesPage')}}>Additional Resources</a>
+    </div>
+  <!--What are social stories-->
+  <h1>This is where I will put my additional resources explaining the uses and benefits of social stories and additional places for people to learn more</h1>
+  <!--When are social stories useful-->
+  <!--Where can I learn more about social stories-->
+  <!--My references for above information-->
 </body>
 </html>
