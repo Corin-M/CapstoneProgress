@@ -9,6 +9,7 @@ My project is expanding accessibility to video and VR social stories for individ
 - __templates__ HTML webpages to be displayed as the frontend of the webpage
 - __static__ CSS formatting to be applied to the HTML webpages
 
+
 # Current Instructions to run:
 Either in the command line or in a virtual enviroment of your choosing use the following commands to launch the local webpage. 
 1. pip install -r requirements
