@@ -8,10 +8,15 @@ import sqlalchemy
 
 #set up flask and initialize database. 
 app = Flask(__name__)
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+#app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+#Flask boot up commands for deployment
+if __name__== "__main__":
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0',port=port,debug= True)
 
 #establish uploads table in the database
 class Upload(db.Model):
@@ -160,8 +165,5 @@ def howTo():
 def resourcesPage():
     return render_template("resourcesPage.html")
 
-#Flask boot up commands for deployment
-if __name__== "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0',port=port,debug= True)
+
 
