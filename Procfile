@@ -1,2 +1,2 @@
-web: flask run --app app --port 5000 --host 0.0.0.0
+web: flask run -p 5000 -h 0.0.0.0
 
