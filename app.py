@@ -1,6 +1,4 @@
-#import the necessary packages
 import os
-from warnings import filters
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Boolean
@@ -37,9 +35,8 @@ class Upload(db.Model):
 
 #create the table
 db.create_all()
-
 #create and add the following example social story to the table: https://www.youtube.com/watch?v=N8oRz9vbuhY
-db.session.add(Upload(fileName='NVA Auditions2', author = 'Sam Ginn, Corin Magee',
+db.session.add(Upload(fileName='NVA Auditions', author = 'Sam Ginn, Corin Magee',
                     description = 'A social story that goes through the process of auditioning at New Village Arts Theater',
                     fileURL='https://www.youtube.com/embed/N8oRz9vbuhY',
                     tags= 'youngAdult', show_search=True, show_filter=True))
@@ -49,7 +46,7 @@ db.session.commit()
 def checkDisplays():
     displayVids = []
     #query all videos in database
-    for video in Upload.query.all():
+    for video in Upload.query.all().distinct():
         #only those videos that can be shown according to both the search and filter criteria are added to the list for display
         if video.show_filter==True and video.show_search==True:
             displayVids.append([video.fileName,video.author,  video.fileURL,video.description])
@@ -57,7 +54,7 @@ def checkDisplays():
 
 #sets all video's filters and searches off [used in FilterSearch()]
 def clearSearchFilters():
-    for video in Upload.query.all():
+    for video in Upload.query.distinct.all():
         video.show_search = False
         video.show_filter = False
         db.session.commit()
@@ -67,7 +64,7 @@ def clearSearchFilters():
 def index():
     #add all videos in the database to the display list, as all searches and filters are empty
     fullDisplay = []
-    for video in Upload.query.all():
+    for video in Upload.query.distinct().all():
          fullDisplay.append([video.fileName,video.author, video.fileURL, video.description])
     #load the index.html template, with the full list of videos to display
     return render_template('index.html', vids=fullDisplay)
@@ -165,4 +162,7 @@ def resourcesPage():
 
 #Flask boot up commands for deployment
 if __name__== "__main__":
-    app.run()
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0',port=port)
+
+    
