@@ -46,7 +46,7 @@ db.session.commit()
 def checkDisplays():
     displayVids = []
     #query all videos in database
-    for video in Upload.query.all().distinct():
+    for video in Upload.query.all():
         #only those videos that can be shown according to both the search and filter criteria are added to the list for display
         if video.show_filter==True and video.show_search==True:
             displayVids.append([video.fileName,video.author,  video.fileURL,video.description])
@@ -54,7 +54,7 @@ def checkDisplays():
 
 #sets all video's filters and searches off [used in FilterSearch()]
 def clearSearchFilters():
-    for video in Upload.query.distinct.all():
+    for video in Upload.query.all():
         video.show_search = False
         video.show_filter = False
         db.session.commit()
@@ -64,7 +64,7 @@ def clearSearchFilters():
 def index():
     #add all videos in the database to the display list, as all searches and filters are empty
     fullDisplay = []
-    for video in Upload.query.distinct().all():
+    for video in Upload.query.all():
          fullDisplay.append([video.fileName,video.author, video.fileURL, video.description])
     #load the index.html template, with the full list of videos to display
     return render_template('index.html', vids=fullDisplay)
