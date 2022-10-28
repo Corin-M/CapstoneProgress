@@ -97,9 +97,17 @@ def filterSearch():
     if cat_filter == "all" and aud_filter == "all":
         for video in Upload.query.all():
             video.show_filter = True
-    #if there are filters go through all videos and mark the ones where the filter is applicable for show according to filter criteria
+    #if only an audience filter is active, set show filter for videos under that criteria
+    elif cat_filter=="all":
+        for video in Upload.query.filter(Upload.tags.contains(aud_filter)):
+            video.show_filter = True
+    #if only a category filter is active, set show filter for videos under that criteria
+    elif aud_filter=="all":
+        for video in Upload.query.filter(Upload.tags.contains(cat_filter)):
+            video.show_filter = True
+        #if both filters are active, set show filter for videos under both criteria
     else:
-        for video in Upload.query.filter(Upload.tags.contains(cat_filter) | Upload.tags.contains(aud_filter)):
+        for video in Upload.query.filter(Upload.tags.contains(aud_filter) & Upload.tags.contains(cat_filter)):
             video.show_filter = True
     #upload the changes to show-criteria  to the database
     db.session.commit()
