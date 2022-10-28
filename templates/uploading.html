@@ -27,8 +27,11 @@
         <a type="button" href={{url_for('howTo')}}> How To Create A Social Story</a>
         <a type="button" href={{url_for('resourcesPage')}}>Additional Resources</a>
       </div>
-
-    <!--If an error is thrown during upload, allow for flashed messages-->
+    <!--Instructions for upload-->
+    <p>To upload a video to the database, you first need it to be on youtube and have the link available (either public or unlisted)
+      Next, fill out the form below and hit submit. </p>
+    <br><br>
+      <!--If an error is thrown during upload, allow for flashed messages-->
     {% block content %}
     <div class="pop-up">
         {% for message in get_flashed_messages() %}
