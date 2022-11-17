@@ -37,12 +37,12 @@ class Upload(db.Model):
 #create the table
 with app.app_context():
     db.create_all()
-#create and add the following example social story to the table: https://www.youtube.com/watch?v=N8oRz9vbuhY
-db.session.add(Upload(fileName='NVA Auditions', author = 'Sam Ginn, Corin Magee',
-                    description = 'A social story that goes through the process of auditioning at New Village Arts Theater',
-                    fileURL='https://www.youtube.com/embed/N8oRz9vbuhY',
-                    tags= 'youngAdult', show_search=True, show_filter=True))
-db.session.commit()
+    #create and add the following example social story to the table: https://www.youtube.com/watch?v=N8oRz9vbuhY
+    db.session.add(Upload(fileName='NVA Auditions', author = 'Sam Ginn, Corin Magee',
+                        description = 'A social story that goes through the process of auditioning at New Village Arts Theater',
+                        fileURL='https://www.youtube.com/embed/N8oRz9vbuhY',
+                        tags= 'youngAdult', show_search=True, show_filter=True))
+    db.session.commit()
 
 #runs through the table and creates a list of the name, author, url, and description for each video that meats filter and search criteria to be displayed
 def checkDisplays():
