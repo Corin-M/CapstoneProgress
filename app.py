@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, current_app
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Boolean
 import sqlalchemy
@@ -10,6 +10,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
 
 
 #establish uploads table in the database
@@ -34,7 +35,8 @@ class Upload(db.Model):
     show_search = db.Column(db.Boolean)
 
 #create the table
-db.create_all()
+with app.app_context():
+    db.create_all()
 #create and add the following example social story to the table: https://www.youtube.com/watch?v=N8oRz9vbuhY
 db.session.add(Upload(fileName='NVA Auditions', author = 'Sam Ginn, Corin Magee',
                     description = 'A social story that goes through the process of auditioning at New Village Arts Theater',
