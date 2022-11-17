@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@liudonghua123/now-flask": "^0.0.37-canary.4"
+  }
+}
