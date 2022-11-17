@@ -3,7 +3,7 @@
     "builds": [
         {
             "src": "*.py",
-            "use": "@Corin-M/CapstoneProgress"
+            "use": "@liudonghua123/now-flask"
         }
     ],
     "routes": [
