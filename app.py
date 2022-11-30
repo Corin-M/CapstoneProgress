@@ -63,13 +63,18 @@ def clearSearchFilters():
 
 #Home page loading instructions
 @app.route('/')
-def index():
+def home():
+    return render_template('home.html')
+
+#Video Library loading instructions
+@app.route('/library')
+def library():
     #add all videos in the database to the display list, as all searches and filters are empty
     fullDisplay = []
     for video in Upload.query.all():
          fullDisplay.append([video.fileName,video.author, video.fileURL, video.description])
-    #load the index.html template, with the full list of videos to display
-    return render_template('index.html', vids=fullDisplay)
+    #load the library.html template, with the full list of videos to display
+    return render_template('library.html', vids=fullDisplay)
 
 #Filtering and Searching instructions
 @app.route('/filterSearch', methods=['POST', 'GET'])
@@ -115,8 +120,8 @@ def filterSearch():
     db.session.commit()
     #create the list to display of videos eligible using both search and filter criteria
     displayVids = checkDisplays()
-    #load the index.html template,
-    return render_template('index.html',vids=displayVids)
+    #load the library.html template,
+    return render_template('library.html',vids=displayVids)
 
 
 #uploads page instructions
