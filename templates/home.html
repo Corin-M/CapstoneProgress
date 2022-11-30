@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!--Load the formatting.css file for formatting, subject to change-->  
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='formatting.css') }}">
+  <title>Home</title>
+   <!--Current styling in addition to the css linked above, subject to change-->
+  <style>
+        body {
+          margin: 0;
+        }
+  
+        .center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+      </style>
+</head>
+
+<body>
+  <!--Top navigation bar and corresponding buttons-->
+  <div class="topnav">
+      <a type="active" href={{url_for('home')}}>Home</a>
+      <a type="button" href={{url_for('library')}}>Social Story library</a>
+      <a type="button" href={{url_for('uploads')}}> Upload A Social Story</a>
+      <a class="button" href={{url_for('howTo')}}> How To Create A Social Story</a>
+      <a type="button" href={{url_for('resourcesPage')}}>Additional Resources</a>
+  </div>
+  <h1>Welcome to Corin Magee's Social Story Collection!</h1>
+  <br>
+  <h2>About the cite:</h2>
+  <p>This is the landing site for Corin Magee's senior capstone for Minerva University 2022-2023. 
+      The purpose of this project is to compile a consolidated resource for learning about social stories,
+      accessing pre-made social stories in one library, and a guide to creating your own social stories.</p>
+  <br>
+  <h2>How to use the cite:</h2>
+  <p><i>[Insert a video guide to the website here]</i></p>
+</body>

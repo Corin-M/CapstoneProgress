@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!--Load the formatting.css file for formatting, subject to change-->
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='formatting.css') }}">
-    <title>Home Page</title>
+    <title>Library</title>
     <!--Current styling in addition to the css linked above, subject to change-->
     <style>
         body {
@@ -23,10 +23,11 @@
 <body>
   <!--Top navigation bar and corresponding buttons-->
   <div class="topnav">
-        <a class="active" href={{ url_for('index' )}}>Home</a>
-        <a type="button" href={{ url_for('uploads' )}}> Upload Video</a>
-        <a type="button" href={{ url_for('howTo' )}}> How To Create A Social Story</a>
-        <a type="button" href={{ url_for('resourcesPage' )}}>Additional Resources</a>
+    <a type="button" href={{url_for('home')}}>Home</a>
+    <a type="active" href={{url_for('library')}}>Social Story library</a>
+    <a type="button" href={{url_for('uploads')}}> Upload A Social Story</a>
+    <a class="button" href={{url_for('howTo')}}> How To Create A Social Story</a>
+    <a type="button" href={{url_for('resourcesPage')}}>Additional Resources</a>
   </div>
   <!--Create the search and filter bar to take user inputs as a single form-->
   <form method ="POST" action="/filterSearch" enctype="multipart/form-data">

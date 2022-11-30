@@ -161,7 +161,7 @@ def add():
         db.session.add(newUpload)
         db.session.commit()
         #reroute to home page once new entry is saved
-        return redirect('/')
+        return redirect('/library')
         
 #howTo Page instructions: Load the howTo.html template (this page is static)        
 @app.route('/howTo')
