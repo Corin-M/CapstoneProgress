@@ -37,11 +37,23 @@ class Upload(db.Model):
 #create the table
 with app.app_context():
     db.create_all()
-    #create and add the following example social story to the table: https://www.youtube.com/watch?v=N8oRz9vbuhY
+    #create and add the following example social stories to the table: 
+    # NVA Auditions: https://www.youtube.com/watch?v=N8oRz9vbuhY
     db.session.add(Upload(fileName='NVA Auditions', author = 'Sam Ginn, Corin Magee',
                         description = 'A social story that goes through the process of auditioning at New Village Arts Theater',
                         fileURL='https://www.youtube.com/embed/N8oRz9vbuhY',
-                        tags= 'youngAdult', show_search=True, show_filter=True))
+                        tags= 'jobPrep youngAdult', show_search=True, show_filter=True))
+    # Sapience: https://www.youtube.com/watch?v=wi4UtGAI2no&t=2s&ab_channel=Sammy%27sStudio 
+    db.session.add(Upload(fileName='Sapience', author = 'Sam Ginn',
+                        description =  'Ethan Marr goes to see "Sapience". He provides some insight on what to expect at the theatre',
+                        fileURL='https://www.youtube.com/embed/wi4UtGAI2no',
+                        tags= 'entertainment youngAdult', show_search=True, show_filter=True))
+    #The Mechanicals: https://www.youtube.com/watch?v=KpT2-k3zOOU&ab_channel=Sammy%27sStudio 
+    db.session.add(Upload(fileName='The Mechanicals', author = 'Sam Ginn',
+                        description =  'Matthew goes to see "The Mechanicals". He provides some insight on what to expect at the theatre',
+                        fileURL='https://www.youtube.com/embed/KpT2-k3zOOU',
+                        tags= 'entertainment youngAdult', show_search=True, show_filter=True))
+                    
     db.session.commit()
 
 #runs through the table and creates a list of the name, author, url, and description for each video that meats filter and search criteria to be displayed
