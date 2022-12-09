@@ -29,10 +29,10 @@ class Upload(db.Model):
     tags= db.Column(db.String(50))
     #description is the brief summary of the social story to be displayed under the video
     description = db.Column(db.String(150))
-    #when show_filter is True [default], the video should be displayed under the current filter criteria [see filterSearch() below for more details]
-    show_filter= db.Column(db.Boolean)
-    #when show_search is True [default], the video should be displayed under the current search terms [see filterSearch() below for more details]
-    show_search = db.Column(db.Boolean)
+    #when showFilter is True [default], the video should be displayed under the current filter criteria [see filterSearch() below for more details]
+    showFilter= db.Column(db.Boolean)
+    #when showSearch is True [default], the video should be displayed under the current search terms [see filterSearch() below for more details]
+    showSearch = db.Column(db.Boolean)
 
 #create the table
 with app.app_context():
@@ -42,17 +42,17 @@ with app.app_context():
     db.session.add(Upload(fileName='NVA Auditions', author = 'Sam Ginn, Corin Magee',
                         description = 'A social story that goes through the process of auditioning at New Village Arts Theater',
                         fileURL='https://www.youtube.com/embed/N8oRz9vbuhY',
-                        tags= 'jobPrep youngAdult', show_search=True, show_filter=True))
+                        tags= 'jobPrep youngAdult', showSearch=True, showFilter=True))
     # Sapience: https://www.youtube.com/watch?v=wi4UtGAI2no&t=2s&ab_channel=Sammy%27sStudio 
     db.session.add(Upload(fileName='Sapience', author = 'Sam Ginn',
                         description =  'Ethan Marr goes to see "Sapience". He provides some insight on what to expect at the theatre',
                         fileURL='https://www.youtube.com/embed/wi4UtGAI2no',
-                        tags= 'entertainment youngAdult', show_search=True, show_filter=True))
+                        tags= 'entertainment youngAdult', showSearch=True, showFilter=True))
     #The Mechanicals: https://www.youtube.com/watch?v=KpT2-k3zOOU&ab_channel=Sammy%27sStudio 
     db.session.add(Upload(fileName='The Mechanicals', author = 'Sam Ginn',
                         description =  'Matthew goes to see "The Mechanicals". He provides some insight on what to expect at the theatre',
                         fileURL='https://www.youtube.com/embed/KpT2-k3zOOU',
-                        tags= 'entertainment youngAdult', show_search=True, show_filter=True))
+                        tags= 'entertainment youngAdult', showSearch=True, showFilter=True))
                     
     db.session.commit()
 
@@ -62,15 +62,15 @@ def checkDisplays():
     #query all videos in database
     for video in Upload.query.all():
         #only those videos that can be shown according to both the search and filter criteria are added to the list for display
-        if video.show_filter==True and video.show_search==True:
+        if video.showFilter==True and video.showSearch==True:
             displayVids.append([video.fileName,video.author,  video.fileURL,video.description])
     return displayVids
 
 #sets all video's filters and searches off [used in FilterSearch()]
 def clearSearchFilters():
     for video in Upload.query.all():
-        video.show_search = False
-        video.show_filter = False
+        video.showSearch = False
+        video.showFilter = False
         db.session.commit()
 
 #Home page loading instructions
@@ -95,39 +95,39 @@ def filterSearch():
     clearSearchFilters()
     #grab the search terms and filters from the corresponding form responses
     searchTerm = request.form["searchterm"]
-    cat_filter= request.form["category-filter"]
-    aud_filter = request.form["audience-filter"]
+    catFilter= request.form["category-filter"]
+    audFilter = request.form["audience-filter"]
     #if there is no search term check the filters
     if searchTerm  == "":
         #if there are no filters in place route the website back to the homepage [show-all default]
-        if  cat_filter == "all" and aud_filter == "all":
+        if  catFilter == "all" and audFilter == "all":
             return redirect('/')
         #if filters are in place but there is no search term, then all videos should be shown according to search criteria
         for video in Upload.query.all():
-            video.show_search = True
+            video.showSearch = True
     #if there is a search term
     else:
         #go through all videos and mark the ones where the search term is contained in the author,
         # title, and/or description for show according to search criteria
         for video in Upload.query.filter(Upload.author.contains(searchTerm)|
         Upload.fileName.contains(searchTerm) |Upload.description.contains(searchTerm)):
-            video.show_search = True
+            video.showSearch = True
     #if there is no filters, all videos should be shown according to filter criteria
-    if cat_filter == "all" and aud_filter == "all":
+    if catFilter == "all" and audFilter == "all":
         for video in Upload.query.all():
-            video.show_filter = True
+            video.showFilter = True
     #if only an audience filter is active, set show filter for videos under that criteria
-    elif cat_filter=="all":
-        for video in Upload.query.filter(Upload.tags.contains(aud_filter)):
-            video.show_filter = True
+    elif catFilter=="all":
+        for video in Upload.query.filter(Upload.tags.contains(audFilter)):
+            video.showFilter = True
     #if only a category filter is active, set show filter for videos under that criteria
-    elif aud_filter=="all":
-        for video in Upload.query.filter(Upload.tags.contains(cat_filter)):
-            video.show_filter = True
+    elif audFilter=="all":
+        for video in Upload.query.filter(Upload.tags.contains(catFilter)):
+            video.showFilter = True
         #if both filters are active, set show filter for videos under both criteria
     else:
-        for video in Upload.query.filter(Upload.tags.contains(aud_filter) & Upload.tags.contains(cat_filter)):
-            video.show_filter = True
+        for video in Upload.query.filter(Upload.tags.contains(audFilter) & Upload.tags.contains(catFilter)):
+            video.showFilter = True
     #upload the changes to show-criteria  to the database
     db.session.commit()
     #create the list to display of videos eligible using both search and filter criteria
@@ -168,7 +168,7 @@ def add():
             tags = tags +tag
         #create a new database entry in Upload, using the above gathered information
         newUpload = Upload(fileName=request.form['videoName'], author =request.form['author'],description = request.form['description'],fileURL=urlID,
-                    tags= tags, show_search=True, show_filter=True)
+                    tags= tags, showSearch=True, showFilter=True)
         #add the new entry to Upload and save the changes
         db.session.add(newUpload)
         db.session.commit()
