@@ -10,7 +10,10 @@ My project is expanding accessibility to video and VR social stories for individ
 - __static__ CSS formatting to be applied to the HTML webpages
 
 
-# Current Instructions to run:
+# The contained code is deployed on Zeet here: 
+[https://tinyurl.com/SocialStories-CM] 
+
+# Or you can run it in on your own computer using the steps below:
 Either in the command line or in a virtual enviroment of your choosing use the following commands to launch the local webpage. 
 1. pip install -r requirements
 2. python app.py
