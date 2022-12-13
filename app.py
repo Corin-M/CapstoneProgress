@@ -38,21 +38,33 @@ class Upload(db.Model):
 with app.app_context():
     db.create_all()
     #create and add the following example social stories to the table: 
+    # How to use a social story: https://www.youtube.com/watch?v=Ire6Wk9rNRg
+    db. session.add(Upload(fileName='How to use a social story', author = 'Corin Magee', 
+                           description ='Corin teaches us how to use a social story before trying something new!',
+                           fileURL='https://youtube.com/embed/Ire6Wk9rNRg',
+                           tags= 'all_aud', showSearch=True,showFilter=True))
+   
     # NVA Auditions: https://www.youtube.com/watch?v=N8oRz9vbuhY
     db.session.add(Upload(fileName='NVA Auditions', author = 'Sam Ginn, Corin Magee',
                         description = 'A social story that goes through the process of auditioning at New Village Arts Theater',
                         fileURL='https://www.youtube.com/embed/N8oRz9vbuhY',
-                        tags= 'jobPrep youngAdult', showSearch=True, showFilter=True))
+                        tags= 'jobPrep teenager youngAdult adult', showSearch=True, showFilter=True))
+    #Avocado Toast Breakfast: https://www.youtube.com/watch?v=0RDSjE-EqOw
+    db.session.add(Upload(fileName='Avocado Toast Breakfast', author = 'Sona Vardanyan',
+                          description = 'Sona teaches us how to make avocado toast for breakfast.',
+                          fileURL='https://www.youtube.com/embed/0RDSjE-EqOw',
+                          tags ='dailyTasks youngAdult adult', showSearch=True, showFilter=True))
     # Sapience: https://www.youtube.com/watch?v=wi4UtGAI2no&t=2s&ab_channel=Sammy%27sStudio 
     db.session.add(Upload(fileName='Sapience', author = 'Sam Ginn',
                         description =  'Ethan Marr goes to see "Sapience". He provides some insight on what to expect at the theatre',
                         fileURL='https://www.youtube.com/embed/wi4UtGAI2no',
-                        tags= 'entertainment youngAdult', showSearch=True, showFilter=True))
+                        tags= 'entertainment preteen teenager youngAdult adult senior', showSearch=True, showFilter=True))
     #The Mechanicals: https://www.youtube.com/watch?v=KpT2-k3zOOU&ab_channel=Sammy%27sStudio 
     db.session.add(Upload(fileName='The Mechanicals', author = 'Sam Ginn',
                         description =  'Matthew goes to see "The Mechanicals". He provides some insight on what to expect at the theatre',
                         fileURL='https://www.youtube.com/embed/KpT2-k3zOOU',
-                        tags= 'entertainment youngAdult', showSearch=True, showFilter=True))
+                        tags= 'entertainment preteen teenager youngAdult adult senior', showSearch=True, showFilter=True))
+    
                     
     db.session.commit()
 
@@ -156,16 +168,18 @@ def add():
         #extract the urlID, based on the v= criteria and concatonate it with the base youtube embeded url
         urlID= "https://www.youtube.com/embed/"+ fullURL[startNumIndex+2:startNumIndex +13]
         #pull the checked-tags and audience from the submitted form
-        tagList=request.form.getlist('tags')
-        audience = request.form["audience"]
-        #add audience to tags
-        tags = audience
+        subjects =request.form.getlist('subjects')
+        audiences = request.form.getlist('audience')
+        tags = ''
         #if the audience is everyone, concatonate the full list with tags for search purposes later
-        if audience == "all_aud":
-            tags = tags + "preschool elementary preteen teenager youngAdult adult senior"
-        #for all checked tags, concatonate them with the tags
-        for tag in tagList:
-            tags = tags +tag
+        if "all_aud" in audiences:
+            tags = tags + "all_aud preschool elementary preteen teenager youngAdult adult senior"
+        else: 
+            for audience in audiences:
+                tags = tags +audience
+        #for all checked category and audience tags, concatonate them with the tags
+        for subject in subjects:
+            tags = tags + subject
         #create a new database entry in Upload, using the above gathered information
         newUpload = Upload(fileName=request.form['videoName'], author =request.form['author'],description = request.form['description'],fileURL=urlID,
                     tags= tags, showSearch=True, showFilter=True)
