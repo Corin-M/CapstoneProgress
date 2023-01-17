@@ -49,16 +49,17 @@ with app.app_context():
                         description = 'A social story that goes through the process of auditioning at New Village Arts Theater',
                         fileURL='https://www.youtube.com/embed/N8oRz9vbuhY',
                         tags= 'jobPrep teenager youngAdult adult', showSearch=True, showFilter=True))
-    #Avocado Toast Breakfast: https://www.youtube.com/watch?v=0RDSjE-EqOw
-    db.session.add(Upload(fileName='Avocado Toast Breakfast', author = 'Sona Vardanyan',
-                          description = 'Sona teaches us how to make avocado toast for breakfast.',
-                          fileURL='https://www.youtube.com/embed/0RDSjE-EqOw',
-                          tags ='dailyTasks youngAdult adult', showSearch=True, showFilter=True))
     # Sapience: https://www.youtube.com/watch?v=wi4UtGAI2no&t=2s&ab_channel=Sammy%27sStudio 
     db.session.add(Upload(fileName='Sapience', author = 'Sam Ginn',
                         description =  'Ethan Marr goes to see "Sapience". He provides some insight on what to expect at the theatre',
                         fileURL='https://www.youtube.com/embed/wi4UtGAI2no',
                         tags= 'entertainment preteen teenager youngAdult adult senior', showSearch=True, showFilter=True))
+                         # Sapience: https://www.youtube.com/watch?v=wi4UtGAI2no&t=2s&ab_channel=Sammy%27sStudio 
+    # Supermarket Shopping: https://www.youtube.com/watch?v=U7y8Jap-ngw                      
+    db.session.add(Upload(fileName='Supermarket Shopping', author = 'Su Yan',
+                        description =  'This video is to teach people with ASD how to shop in a chinese supermarket.',
+                        fileURL='https://www.youtube.com/embed/U7y8Jap-ngw',
+                        tags= 'dailyTasks preteen teenager youngAdult adult senior', showSearch=True, showFilter=True))
     #The Mechanicals: https://www.youtube.com/watch?v=KpT2-k3zOOU&ab_channel=Sammy%27sStudio 
     db.session.add(Upload(fileName='The Mechanicals', author = 'Sam Ginn',
                         description =  'Matthew goes to see "The Mechanicals". He provides some insight on what to expect at the theatre',
