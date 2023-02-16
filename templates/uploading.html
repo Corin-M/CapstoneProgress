@@ -24,7 +24,7 @@
           var checkboxes = document.getElementsByName('approve[]');
           var button = document.getElementById('toggle');
 
-          if(button.value == 'Select All Audiences'){
+          if(button.value == 'Select All Ages'){
               for (var i in checkboxes){
                   checkboxes[i].checked = 'FALSE';
               }
@@ -83,7 +83,7 @@
           <textarea id="description" name ="description"></textarea><br>
           <!-- Checkbox list for the audience level of the video-->
           <label>Audience level:</label><br>
-          <input type="button" id="toggle" value="Select All Audiences" onClick="select_all()" /><br>
+          <input type="button" id="toggle" value="Select All Ages" onClick="select_all()" /><br>
           <input type="checkbox" name="approve[]" id ="audience" value="preschool" /><label>Preschool</label><br>
           <input type="checkbox" name="approve[]" id ="audience"  value="elementary" /><label>Elementary</label><br>
           <input type="checkbox" name="approve[]" id ="audience" value="preteen" /><label>Preteen (11-14)</label><br>
