@@ -11,12 +11,23 @@
           margin: 0;
         }
   
-        .center {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
+      
+
+        .videoDisplays-flex{
+          display:flex;
+          flex-wrap: wrap;
+          max-width: 100%;
         }
+ 
+        .video{
+          border:5px outset black ;
+          flex: 1;
+          max-width: 80%;
+          min-width:30%;
+          aspect-ratio: 16/10;
+          margin: 5px;
+        }
+    
       </style>
 </head>
 
@@ -58,19 +69,19 @@
     </select>
     <button type="submit">Search and Update Filters</button>
   </form>
-
+  <br><br>
   <!--Display the videos passed into the vids list upon loading
   vid[0]=name, vid[1] = author, vid[2] = url, vid[3] = description -->
-  <div class="videoDisplays">
+  <div class="videoDisplays-flex">
       {% for vid in vids %}
+        <div class ="video">
         <label>{{vid[0]}}</label>
         <label>by: {{vid[1]}}</label><br>
         {{vid[3]}}<br>
-        <iframe width="560" height="315" src="{{vid[2]}}" 
+        <iframe  width="95%" height="95%" margin="5%" src="{{vid[2]}}" 
         title="YouTube video player" frameborder="0" allow="accelerometer; 
         clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <br>
-        -----------------<br>
+       </div>
       {% endfor %}
    </div>
 </body>

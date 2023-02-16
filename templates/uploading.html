@@ -17,18 +17,22 @@
           align-items: center;
         }
       </style>
+      <!--In-doc javascript to create a select_all button for the ages options-->
       <script type="text/javascript">
 
         function select_all(){
-
-          var checkboxes = document.getElementsByName('approve[]');
+          //Define variables as they relate to html elements
+          var checkboxes = document.getElementsByName('audience');
           var button = document.getElementById('toggle');
-
+          //If the button is set to select mode, then when clicked select all boxes
+          //and change the button's mode to deselect  
           if(button.value == 'Select All Ages'){
               for (var i in checkboxes){
                   checkboxes[i].checked = 'FALSE';
               }
               button.value = 'Deselect All'
+          //If the button is not on select mode, then when clicked deslect all checkboxes
+          //and change the button's mode to select
           }else{
               for (var i in checkboxes){
                   checkboxes[i].checked = '';
@@ -83,14 +87,16 @@
           <textarea id="description" name ="description"></textarea><br>
           <!-- Checkbox list for the audience level of the video-->
           <label>Audience level:</label><br>
-          <input type="button" id="toggle" value="Select All Ages" onClick="select_all()" /><br>
-          <input type="checkbox" name="approve[]" id ="audience" value="preschool" /><label>Preschool</label><br>
-          <input type="checkbox" name="approve[]" id ="audience"  value="elementary" /><label>Elementary</label><br>
-          <input type="checkbox" name="approve[]" id ="audience" value="preteen" /><label>Preteen (11-14)</label><br>
-          <input type="checkbox" name="approve[]" id ="audience"  value="teenager" /><label>Teenager (15-18)</label><br>
-          <input type="checkbox" name="approve[]" id ="audience"  value="youngAdult" /><label>Young Adult (18-25)<label><br>
-          <input type="checkbox" name="approve[]" id ="audience"  value="adult" /><label>Adult (25-60)<label><br>
-          <input type="checkbox" name="approve[]" id ="audience"  value="senior" /><label>Senior (60+)<label><br>
+            <!--button to select all of the ages in one click will be the same to deselect-->
+            <input type="button" id="toggle" value="Select All Ages" onClick="select_all()" /><br>
+            <!--checkboxes for all additional ages to be selected seperately-->
+            <input type="checkbox" name="audience" id ="audience" value="preschool" /><label>Preschool</label><br>
+            <input type="checkbox" name="audience" id ="audience"  value="elementary" /><label>Elementary</label><br>
+            <input type="checkbox" name="audience" id ="audience" value="preteen" /><label>Preteen (11-14)</label><br>
+            <input type="checkbox" name="audience" id ="audience"  value="teenager" /><label>Teenager (15-18)</label><br>
+            <input type="checkbox" name="audience" id ="audience"  value="youngAdult" /><label>Young Adult (18-25)<label><br>
+            <input type="checkbox" name="audience" id ="audience"  value="adult" /><label>Adult (25-60)<label><br>
+            <input type="checkbox" name="audience" id ="audience"  value="senior" /><label>Senior (60+)<label><br>
           <br>
           <!--Checkbox list for the categories of the subject of the video-->
           <label>Subjects:</label><br>
