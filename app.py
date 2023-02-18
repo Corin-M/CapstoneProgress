@@ -75,7 +75,7 @@ def checkDisplays():
     #query all videos in database
     for video in Upload.query.all():
         #only those videos that can be shown according to both the search and filter criteria are added to the list for display
-        if video.showFilter==True and video.showSearch==True:
+        if video.showFilter and video.showSearch:
             displayVids.append([video.fileName,video.author,  video.fileURL,video.description])
     return displayVids
 
@@ -174,13 +174,13 @@ def add():
         tags = ''
         #if the audience is everyone, concatonate the full list with tags for search purposes later
         if "all_aud" in audiences:
-            tags = tags + "all_aud preschool elementary preteen teenager youngAdult adult senior"
+            tags += "all_aud preschool elementary preteen teenager youngAdult adult senior"
         else: 
             for audience in audiences:
-                tags = tags +audience
+                tags += audience
         #for all checked category and audience tags, concatonate them with the tags
         for subject in subjects:
-            tags = tags + subject
+            tags += subject
         #create a new database entry in Upload, using the above gathered information
         newUpload = Upload(fileName=request.form['videoName'], author =request.form['author'],description = request.form['description'],fileURL=urlID,
                     tags= tags, showSearch=True, showFilter=True)
