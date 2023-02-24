@@ -27,6 +27,8 @@
           min-width:30%;
           aspect-ratio: 16/10;
           margin: 5px;
+          padding-bottom: 5%;
+          position: relative;
         }
     
       </style>
@@ -78,8 +80,8 @@
         <div class ="video">
         <label>{{vid[0]}}</label>
         <label>by: {{vid[1]}}</label><br>
-        {{vid[3]}}<br>
-        <iframe  width="95%" height="95%" margin="5%" src="{{vid[2]}}" 
+        {{vid[3]}}<br><br>
+        <iframe aspect-ratio="16/9" postition="absolute" height="100%" width="100%"  margin="5%" src="{{vid[2]}}" 
         title="YouTube video player" frameborder="0" allow="accelerometer; 
         clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
        </div>
